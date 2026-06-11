@@ -693,7 +693,7 @@
             ไฟฟ้าและแม่เหล็ก
           </span>
           <h2 class="text-2xl md:text-3xl font-bold text-slate-800 leading-tight">
-            บทที่ 15: แม่เหล็กและไฟฟ้าเหนี่ยวนำและกระแสสลับ <span class="text-blue-600">($\varepsilon, V_{\text{rms}}, \text{Transformer}$)</span>
+            บทที่ 15 : แม่เหล็กและไฟฟ้า 2 <span class="text-blue-600">(Electromagnetics 2)</span>
           </h2>
           <p class="text-slate-600 text-sm md:text-base leading-relaxed">
             ยินดีต้อนรับนักเรียนชั้น ม.6 ทุกคน! เว็บไซต์นี้จะช่วยให้เธอเข้าใจฟิสิกส์บทที่ 15 ในหัวข้อ **15.4 กระแสไฟฟ้าเหนี่ยวนำและอีเอ็มเอฟเหนี่ยวนำ** (กฎของฟาราเดย์และกฎของเลนส์) และ **15.5 ไฟฟ้ากระแสสลับ** (ค่าอาร์เอ็มเอสและหม้อแปลงไฟฟ้า) พร้อมเครื่องทดลองจำลองเชิงโต้ตอบ ระบบสุ่มฝึกโจทย์คำนวณตามแนวคู่มือครู สสวท. และแบบทดสอบเก็บคะแนนวัดประเมินผลพร้อมเฉลยละเอียดครับ!
@@ -1187,6 +1187,193 @@
 
             </div>
           </div>
+
+          <!-- Exercise Card for 15.12: พลังงานสูญเสียในสายส่งไฟฟ้า -->
+          <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 shadow-md border border-blue-100 space-y-6">
+            <div class="flex items-center justify-between border-b border-blue-100 pb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-sm">
+                  <i class="fa-solid fa-bolt text-lg"></i>
+                </div>
+                <div>
+                  <span class="text-xs font-bold text-blue-600 uppercase tracking-wider block">หัวข้อ 15.12</span>
+                  <h4 class="font-extrabold text-slate-800 text-base md:text-lg">พลังงานสูญเสียในสายส่งไฟฟ้า</h4>
+                </div>
+              </div>
+              <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-bold shadow-sm">โจทย์ประยุกต์</span>
+            </div>
+
+            <!-- Question Area -->
+            <div class="bg-white rounded-xl p-5 border border-slate-100 shadow-sm space-y-3">
+              <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider">📋 โจทย์ปัญหา</p>
+              <div class="text-slate-700 text-sm md:text-base font-medium leading-relaxed space-y-2">
+                <p>การส่งกำลังไฟฟ้า $88\text{ กิโลวัตต์}$ จากต้นทาง โดยสายไฟฟ้าที่ใช้ส่งมีความต้านทาน $0.25\text{ โอห์ม}$ หากส่งกำลังไฟฟ้าจำนวนนี้เป็นเวลา $10\text{ วินาที}$ จงหาพลังงานที่สูญเสียไปในสายไฟฟ้า เมื่อส่งด้วยความต่างศักย์ต่อไปนี้</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pl-2 mt-2">
+                  <div class="flex items-center gap-2 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                    <span class="w-6 h-6 bg-red-100 text-red-700 rounded-full flex items-center justify-center text-xs font-bold">ก</span>
+                    <span class="text-xs md:text-sm font-semibold text-slate-700">ส่งด้วยความต่างศักย์ 220 โวลต์</span>
+                  </div>
+                  <div class="flex items-center gap-2 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                    <span class="w-6 h-6 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center text-xs font-bold">ข</span>
+                    <span class="text-xs md:text-sm font-semibold text-slate-700">ส่งด้วยความต่างศักย์ 22,000 โวลต์</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="flex justify-center">
+              <button onclick="toggleTransmissionSolution()" id="btn-toggle-trans-solution" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl text-sm font-bold shadow-md transition duration-200 flex items-center gap-2 transform active:scale-95">
+                <i class="fa-solid fa-eye" id="icon-toggle-trans-solution"></i>
+                <span id="text-toggle-trans-solution">แสดงวิธีทำ</span>
+              </button>
+            </div>
+
+            <!-- Solution Container (Hidden by default) -->
+            <div id="transmission-solution-box" class="hidden transition-all duration-300 space-y-6">
+              
+              <!-- Formula Definitions -->
+              <div class="bg-blue-900 text-white rounded-xl p-5 shadow-inner space-y-3">
+                <p class="text-xs font-bold tracking-wider text-cyan-300 uppercase flex items-center gap-1">
+                  <i class="fa-solid fa-circle-info"></i> สูตรและตัวแปรที่เกี่ยวข้อง
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <!-- Formulas -->
+                  <div class="space-y-2.5 border-r border-blue-800/60 pr-4">
+                    <div class="flex items-center justify-between bg-blue-950/40 p-2.5 rounded-lg">
+                      <span class="text-xs text-blue-200">1. การหารวมกระแส:</span>
+                      <span class="font-bold text-sm text-cyan-300">$P = VI \rightarrow I = \frac{P}{V}$</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-blue-950/40 p-2.5 rounded-lg">
+                      <span class="text-xs text-blue-200">2. กำลังไฟฟ้าที่สูญเสียในสายส่ง:</span>
+                      <span class="font-bold text-sm text-cyan-300">$P_{\text{loss}} = I^2 R$</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-blue-950/40 p-2.5 rounded-lg">
+                      <span class="text-xs text-blue-200">3. พลังงานสูญเสียสะสม:</span>
+                      <span class="font-bold text-sm text-cyan-300">$E_{\text{loss}} = P_{\text{loss}} t$</span>
+                    </div>
+                  </div>
+                  <!-- Variables -->
+                  <div class="text-xs text-slate-200 space-y-1.5 leading-relaxed">
+                    <p><strong class="text-cyan-300">$P$</strong> = กำลังส่งไฟฟ้าจากต้นทาง ($88\text{ kW} = 88,000\text{ W}$)</p>
+                    <p><strong class="text-cyan-300">$V$</strong> = ความต่างศักย์ไฟฟ้าส่ง ($220\text{ V}$ หรือ $22,000\text{ V}$)</p>
+                    <p><strong class="text-cyan-300">$I$</strong> = กระแสไฟฟ้าที่ไหลในสายส่ง ($\text{A}$)</p>
+                    <p><strong class="text-cyan-300">$R$</strong> = ความต้านทานของสายส่งไฟฟ้า ($0.25\ \Omega$)</p>
+                    <p><strong class="text-cyan-300">$t$</strong> = ช่วงเวลาการส่งไฟฟ้า ($10\text{ s}$)</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step-by-Step Workings -->
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Case 1 -->
+                <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-4">
+                  <div class="flex items-center gap-2 border-b border-slate-100 pb-2">
+                    <span class="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs font-extrabold">ก</span>
+                    <h5 class="font-bold text-slate-800 text-sm md:text-base">กรณีที่ 1: ส่งที่ความต่างศักย์ $220\text{ V}$</h5>
+                  </div>
+                  <div class="text-xs md:text-sm text-slate-600 space-y-3 leading-relaxed">
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 space-y-2">
+                      <p class="font-semibold text-slate-700">ขั้นที่ 1: คำนวณหากระแสไฟฟ้าในสายส่ง ($I$)</p>
+                      <p>จากสูตร $I = \frac{P}{V}$</p>
+                      <p>แทนค่า: $$I = \frac{88,000\text{ W}}{220\text{ V}} = 400\text{ A}$$</p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 space-y-2">
+                      <p class="font-semibold text-slate-700">ขั้นที่ 2: คำนวณหากำลังสูญเสียในสายส่ง ($P_{\text{loss}}$)</p>
+                      <p>จากสูตร $P_{\text{loss}} = I^2 R$</p>
+                      <p>แทนค่า: $$P_{\text{loss}} = (400\text{ A})^2 \times 0.25\ \Omega$$</p>
+                      <p>$$P_{\text{loss}} = 160,000 \times 0.25 = 40,000\text{ W}$$</p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 space-y-2">
+                      <p class="font-semibold text-slate-700">ขั้นที่ 3: คำนวณหาพลังงานที่สูญเสียสะสม ($E_{\text{loss}}$)</p>
+                      <p>จากสูตร $E_{\text{loss}} = P_{\text{loss}} t$</p>
+                      <p>แทนค่า: $$E_{\text{loss}} = 40,000\text{ W} \times 10\text{ s} = 400,000\text{ J}$$</p>
+                    </div>
+                    <div class="bg-rose-50 text-rose-800 p-3 rounded-lg border border-rose-100 font-bold text-center">
+                      ตอบ: พลังงานสูญเสียในสายส่ง = $400,000\text{ จูล}$ ($4.0 \times 10^5\text{ J}$)
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Case 2 -->
+                <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-4">
+                  <div class="flex items-center gap-2 border-b border-slate-100 pb-2">
+                    <span class="w-6 h-6 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-xs font-extrabold">ข</span>
+                    <h5 class="font-bold text-slate-800 text-sm md:text-base">กรณีที่ 2: ส่งที่ความต่างศักย์ $22,000\text{ V}$</h5>
+                  </div>
+                  <div class="text-xs md:text-sm text-slate-600 space-y-3 leading-relaxed">
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 space-y-2">
+                      <p class="font-semibold text-slate-700">ขั้นที่ 1: คำนวณหากระแสไฟฟ้าในสายส่ง ($I$)</p>
+                      <p>จากสูตร $I = \frac{P}{V}$</p>
+                      <p>แทนค่า: $$I = \frac{88,000\text{ W}}{22,000\text{ V}} = 4\text{ A}$$</p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 space-y-2">
+                      <p class="font-semibold text-slate-700">ขั้นที่ 2: คำนวณหากำลังสูญเสียในสายส่ง ($P_{\text{loss}}$)</p>
+                      <p>จากสูตร $P_{\text{loss}} = I^2 R$</p>
+                      <p>แทนค่า: $$P_{\text{loss}} = (4\text{ A})^2 \times 0.25\ \Omega$$</p>
+                      <p>$$P_{\text{loss}} = 16 \times 0.25 = 4\text{ W}$$</p>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 space-y-2">
+                      <p class="font-semibold text-slate-700">ขั้นที่ 3: คำนวณหาพลังงานที่สูญเสียสะสม ($E_{\text{loss}}$)</p>
+                      <p>จากสูตร $E_{\text{loss}} = P_{\text{loss}} t$</p>
+                      <p>แทนค่า: $$E_{\text{loss}} = 4\text{ W} \times 10\text{ s} = 40\text{ J}$$</p>
+                    </div>
+                    <div class="bg-emerald-50 text-emerald-800 p-3 rounded-lg border border-emerald-100 font-bold text-center">
+                      ตอบ: พลังงานสูญเสียในสายส่ง = $40\text{ จูล}$
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Comparison Table -->
+              <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-3">
+                <p class="text-sm font-bold text-slate-700 flex items-center gap-1.5">
+                  <i class="fa-solid fa-table text-blue-600"></i> ตารางเปรียบเทียบผลลัพธ์การส่งกำลังไฟฟ้า
+                </p>
+                <div class="overflow-x-auto rounded-lg border border-slate-200">
+                  <table class="w-full text-left border-collapse">
+                    <thead>
+                      <tr class="bg-slate-50 border-b border-slate-200 text-xs md:text-sm text-slate-700 font-bold">
+                        <th class="px-4 py-3">ความต่างศักย์ไฟฟ้าส่ง ($V$)</th>
+                        <th class="px-4 py-3 text-center">กระแสไฟฟ้า ($I$)</th>
+                        <th class="px-4 py-3 text-center">กำลังสูญเสีย ($P_{\text{loss}}$)</th>
+                        <th class="px-4 py-3 text-center">พลังงานสูญเสียใน 10 วินาที ($E_{\text{loss}}$)</th>
+                      </tr>
+                    </thead>
+                    <tbody class="text-xs md:text-sm text-slate-600 divide-y divide-slate-100">
+                      <tr class="hover:bg-slate-50/50">
+                        <td class="px-4 py-3 font-semibold text-rose-600">$220\text{ V}$ (แรงดันต่ำ)</td>
+                        <td class="px-4 py-3 text-center font-bold">$400\text{ A}$</td>
+                        <td class="px-4 py-3 text-center font-bold">$40,000\text{ W}$</td>
+                        <td class="px-4 py-3 text-center font-extrabold text-rose-600">$400,000\text{ J}$</td>
+                      </tr>
+                      <tr class="hover:bg-slate-50/50">
+                        <td class="px-4 py-3 font-semibold text-emerald-600">$22,000\text{ V}$ (แรงดันสูง)</td>
+                        <td class="px-4 py-3 text-center font-bold">$4\text{ A}$</td>
+                        <td class="px-4 py-3 text-center font-bold">$4\text{ W}$</td>
+                        <td class="px-4 py-3 text-center font-extrabold text-emerald-600">$40\text{ J}$</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Insight Box -->
+              <div class="bg-blue-50/80 text-slate-900 rounded-xl p-5 border-l-4 border-blue-600 border border-blue-200/60 shadow-sm flex items-start gap-3.5">
+                <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 flex-shrink-0 mt-0.5">
+                  <i class="fa-solid fa-lightbulb text-base"></i>
+                </div>
+                <div class="space-y-1">
+                  <p class="text-xs font-bold uppercase tracking-wider text-blue-700">💡 กล่องสรุปความรู้ (Insight Box)</p>
+                  <p class="text-xs md:text-sm font-semibold leading-relaxed">
+                    การส่งไฟฟ้าด้วยแรงดันสูงทำให้กระแสไฟฟ้าลดลง ส่งผลให้กำลังสูญเสียในสายส่งลดลงอย่างมาก เนื่องจากกำลังสูญเสียแปรผันตรงตามกำลังสองของกระแสไฟฟ้า ($I^2$) ส่งผลให้พลังงานความร้อนที่สูญเสียสะสมในสายส่งก็น้อยลงตามไปด้วยถึง $10,000\text{ เท่า}$ ในกรณีตัวอย่างนี้!
+                  </p>
+                </div>
+              </div>
+
+            </div> <!-- end of transmission-solution-box -->
+          </div>
+
         </div>
       </div>
     </section>
@@ -1843,6 +2030,9 @@ function endExamSession() {
 
 function renderMath() {
   if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+    if (MathJax.typesetClear) {
+      MathJax.typesetClear();
+    }
     MathJax.typesetPromise().catch(function (err) {
       console.error("MathJax error: ", err);
     });
@@ -2032,7 +2222,7 @@ function initLenzSimulator() {
     document.getElementById('lbl-sim4-induced-pole').innerText = inducedPole;
 
     const dPhiAbs = Math.abs(dPhi).toExponential(1);
-    document.getElementById('lbl-sim4-calc').innerHTML = `\\varepsilon = -${lenzState.turns} \\times \\frac{${dPhi >= 0 ? '' : '-'}${dPhiAbs}\\text{ Wb}}{${dt.toFixed(2)}\\text{ s}}`;
+    document.getElementById('lbl-sim4-calc').innerHTML = `$\\varepsilon = -${lenzState.turns} \\times \\frac{${dPhi >= 0 ? '' : '-'}${dPhiAbs}\\text{ Wb}}{${dt.toFixed(2)}\\text{ s}}$`;
     document.getElementById('lbl-sim4-result').innerText = (emf === 0 ? "0.000" : emf.toFixed(3));
 
     renderMath();
@@ -2218,7 +2408,7 @@ function initAcRmsSimulator() {
     document.getElementById('lbl-sim5-rms').innerText = vRms.toFixed(1);
 
     const omega = 2 * Math.PI * acState.freq;
-    document.getElementById('lbl-sim5-calc').innerHTML = `\\omega = 2\\pi f = 2 \\times 3.14 \\times ${acState.freq} = ${omega.toFixed(0)}\\text{ rad/s} \\\\ V_{\\text{rms}} = \\frac{${acState.v0.toFixed(0)}}{\\sqrt{2}} \\approx ${vRms.toFixed(1)}\\text{ V}`;
+    document.getElementById('lbl-sim5-calc').innerHTML = `$\\omega = 2\\pi f = 2 \\times 3.14 \\times ${acState.freq} = ${omega.toFixed(0)}\\text{ rad/s}$ <br> $V_{\\text{rms}} = \\frac{${acState.v0.toFixed(0)}}{\\sqrt{2}} \\approx ${vRms.toFixed(1)}\\text{ V}$`;
 
     renderMath();
     drawAcRmsSim();
@@ -2319,7 +2509,7 @@ function initTransformerSimulator() {
       badge.className = "bg-slate-500/20 text-slate-300 border border-slate-500/40 px-2 py-0.5 rounded text-[10px] font-bold";
     }
 
-    document.getElementById('lbl-sim5-trans-calc').innerHTML = `V_2 = V_1 \\times \\left(\\frac{N_2}{N_1}\\right) = ${transState.v1.toFixed(0)} \\times \\left(\\frac{${transState.n2}}{${transState.n1}}\\right) = ${v2.toFixed(1)}\\text{ V}`;
+    document.getElementById('lbl-sim5-trans-calc').innerHTML = `$V_2 = V_1 \\times \\left(\\frac{N_2}{N_1}\\right) = ${transState.v1.toFixed(0)} \\times \\left(\\frac{${transState.n2}}{${transState.n1}}\\right) = ${v2.toFixed(1)}\\text{ V}$`;
 
     renderMath();
     drawTransformerSim();
@@ -2413,9 +2603,38 @@ function switchSim5SubTab(subTabName) {
     initTransformerSimulator();
   }
 }
-}
 
 const QUESTION_TEMPLATES = [
+  {
+    id: '15_4_img_concept', topic: '15.4', type: 'choice',
+    title: 'ทิศทางกระแสไฟฟ้าเหนี่ยวนำจากกฎของเลนส์ (โจทย์จากรูปภาพ)',
+    choices: [
+      'รูป 1: ตามเข็มนาฬิกา, รูป 2: ทวนเข็มนาฬิกา',
+      'รูป 1: ทวนเข็มนาฬิกา, รูป 2: ตามเข็มนาฬิกา',
+      'รูป 1: ตามเข็มนาฬิกา, รูป 2: ตามเข็มนาฬิกา',
+      'รูป 1: ทวนเข็มนาฬิกา, รูป 2: ทวนเข็มนาฬิกา'
+    ],
+    text: (p) => `<div class="space-y-3">
+      <div class="flex justify-center my-3 bg-white p-2 rounded-xl border border-slate-100 max-w-lg mx-auto">
+        <img src="./picture/exer.1.png" alt="Lenz's Law Diagram" class="w-full max-h-48 object-contain">
+      </div>
+      <p>จากรูป 1 ถ้าเคลื่อนขั้วใต้ S ของแท่งแม่เหล็กเข้าหาศูนย์กลางของขดลวด และจากรูป 2 ถ้าเคลื่อนขั้วใต้ S ของแท่งแม่เหล็กออกจากศูนย์กลางของขดลวด จงเขียนทิศทางของกระแสไฟฟ้าเหนี่ยวนำที่เกิดขึ้นในขดลวดทั้งสอง (เมื่อมองจากฝั่งขวาที่เป็นฝั่งแท่งแม่เหล็กมองเข้าหาขดลวด)</p>
+    </div>`,
+    generate: (rand) => {
+      return {
+        params: {},
+        answers: ['รูป 1: ตามเข็มนาฬิกา, รูป 2: ทวนเข็มนาฬิกา'],
+        answersRaw: [0],
+        explanation: () => `<strong>วิเคราะห์ตามกฎของเลนส์ (Lenz's Law):</strong>
+        <br>• <strong>รูป 1 (เคลื่อนขั้วใต้ S เข้าหาขดลวด):</strong> 
+        <br>- ขดลวดตัวนำต้องการต้านการเคลื่อนที่เข้าของขั้วใต้ (S) จึงเหนี่ยวนำให้ฝั่งขวา (ฝั่งใกล้แม่เหล็ก) เกิดเป็น <strong>ขั้วใต้ (S)</strong> เพื่อต้านกัน
+        <br>- เมื่อเกิดขั้วใต้ (S) ที่ฝั่งขวา กระแสเหนี่ยวนำที่มองจากฝั่งขวา (ฝั่งแม่เหล็ก) จึงต้องไหลในทิศ <strong>ตามเข็มนาฬิกา</strong>
+        <br><br>• <strong>รูป 2 (เคลื่อนขั้วใต้ S ออกจากขดลวด):</strong> 
+        <br>- ขดลวดตัวนำต้องการต้านการเคลื่อนที่ออกของขั้วใต้ (S) จึงเหนี่ยวนำให้ฝั่งขวา (ฝั่งใกล้แม่เหล็ก) เกิดเป็น <strong>ขั้วเหนือ (N)</strong> เพื่อดึงดูดกันไว้
+        <br>- เมื่อเกิดขั้วเหนือ (N) ที่ฝั่งขวา กระแสเหนี่ยวนำที่มองจากฝั่งขวา (ฝั่งแม่เหล็ก) จึงต้องไหล in ทิศ <strong>ทวนเข็มนาฬิกา</strong>`
+      };
+    }
+  },
   {
     id: '15_4_q1_concept', topic: '15.4', type: 'choice',
     title: 'แนวคิดกฎของเลนส์ (Lenz\'s Law)',
@@ -2640,6 +2859,28 @@ const QUESTION_TEMPLATES = [
         <br>ดังนั้น ความต่างศักย์ทุติยภูมิที่เกิดขึ้นคือ $${V2.toFixed(1)}$ โวลต์`
       };
     }
+  },
+  {
+    id: '15_5_ex4', topic: '15.5', type: 'numeric_single',
+    title: 'วิเคราะห์สมการความต่างศักย์ไฟฟ้ากระแสสลับ (RMS)',
+    inputs: [{ label: 'ความต่างศักย์ยังผล / RMS (V):' }],
+    text: (p) => `ความต่างศักย์ไฟฟ้ากระแสสลับมีค่าตามสมการ $v = ${p.V0}\\sin(${p.omegaText} t)$ ความต่างศักย์อาร์เอ็มเอสมีค่าเท่าใด (ตอบปัดทศนิยม 1 ตำแหน่ง)`,
+    generate: (rand) => {
+      const V0 = rand ? [30, 45, 60, 110, 220, 311][Math.floor(Math.random() * 6)] : 45;
+      const f = rand ? [50, 60][Math.floor(Math.random() * 2)] : 50;
+      const omegaText = f === 50 ? '100\\pi' : '120\\pi';
+      const Vrms = V0 / Math.sqrt(2);
+      return {
+        params: { V0, omegaText },
+        answers: [Vrms.toFixed(1)],
+        answersRaw: [Vrms],
+        explanation: () => `จากการเปรียบเทียบสมการ $v = ${V0}\\sin(${omegaText} t)$ กับสมการทั่วไป $v = V_0\\sin(\\omega t)$:
+        <br>1) ความต่างศักย์สูงสุด $V_0$ คือสัมประสิทธิ์หน้าฟังก์ชันไซน์:
+        <br>$$V_0 = ${V0}\\text{ V}$$
+        <br>2) ความต่างศักย์ยังผล หรือ ความต่างศักย์อาร์เอ็มเอส ($V_{\\text{rms}}$) คำนวณจากสูตร:
+        <br>$$V_{\\text{rms}} = \\frac{V_0}{\\sqrt{2}} = \\frac{${V0}}{\\sqrt{2}} \\approx \\frac{${V0}}{1.414} \\approx ${Vrms.toFixed(1)}\\text{ V}$$`
+      };
+    }
   }
 ];
 
@@ -2669,7 +2910,7 @@ function regeneratePractice() {
   currentPracticeQuestion = { template, instance };
   document.getElementById('prac-badge-mode').innerText = `หัวข้อ ${formattedTopic} • ` + (isRandom ? 'แบบสุ่มตัวแปร' : 'แบบคู่มือครู สสวท.');
   document.getElementById('prac-question-title').innerText = `📋 โจทย์: ${template.title}`;
-  document.getElementById('prac-question-text').innerText = template.text(instance.params);
+  document.getElementById('prac-question-text').innerHTML = template.text(instance.params);
   const choiceZone = document.getElementById('prac-choice-zone');
   const numericZone = document.getElementById('prac-numeric-zone');
   document.getElementById('prac-input-val1').value = '';
@@ -2917,6 +3158,22 @@ function toggleExamSolutionBox() {
   } else {
     box.classList.add('hidden');
     text.innerText = "ดูเฉลยละเอียดของข้อที่คุณได้รับ";
+  }
+}
+
+function toggleTransmissionSolution() {
+  const box = document.getElementById('transmission-solution-box');
+  const btnText = document.getElementById('text-toggle-trans-solution');
+  const btnIcon = document.getElementById('icon-toggle-trans-solution');
+  if (box.classList.contains('hidden')) {
+    box.classList.remove('hidden');
+    btnText.innerText = 'ซ่อนวิธีทำ';
+    btnIcon.className = 'fa-solid fa-eye-slash';
+    renderMath();
+  } else {
+    box.classList.add('hidden');
+    btnText.innerText = 'แสดงวิธีทำ';
+    btnIcon.className = 'fa-solid fa-eye';
   }
 }
 
